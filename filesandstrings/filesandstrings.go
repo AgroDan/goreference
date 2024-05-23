@@ -1,16 +1,18 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 func ReadEntireFile() {
 	// This function will read the entire file and print it to the screen.
 	// First, let's open the file. We'll need the "os" package to do this.
 	// I'll store the location of the file in the thisFile variable
-	thisFile := "./myfile.txt"
+	thisFile := "./filesandstrings/myfile.txt"
 
 	// Now I'll open the file path for reading:
 	file, err := os.Open(thisFile)
@@ -41,7 +43,7 @@ func ReadInChunks(bytesReadSize int) {
 	// This does the same thing as the above, but will instead read
 	// a relatively large file in chunks of `bytes` length at a time
 	// so it doesn't overload memory
-	thisFile := "./largefile.txt"
+	thisFile := "./filesandstrings/largefile.txt"
 
 	// Open for reading
 	file, err := os.Open(thisFile)
@@ -78,11 +80,94 @@ func ReadInChunks(bytesReadSize int) {
 		// also note that the bytes it returns will be in a byte array.
 		// We can turn that into a string.
 	}
+}
 
+func WriteToFile(someData string) {
+	// Writing to a file, by default, accepts a byte array.
+	// If you want to write a string however, you can use the
+	// WriteString() function.
+
+	// First, let's Create a file
+	createThisFile := "./filesandstrings/NewlyCreatedFile.txt"
+
+	file, err := os.Create(createThisFile)
+	if err != nil {
+		fmt.Println("Error creating file:", err)
+	}
+	defer file.Close()
+
+	// You can just use `bytesWritten, err := f.WriteString(someData)`
+	// here, but it's better to use a buffered writer provided by bufio
+	w := bufio.NewWriter(file)
+
+	bytesWritten, err := w.WriteString(someData)
+	if err != nil {
+		fmt.Println("Could not write to file:", err)
+	}
+
+	fmt.Printf("Wrote %d bytes.\n", bytesWritten)
+
+	// now flush the buffer to the file
+	w.Flush()
+
+	// note that we can execute a similar file write buffer example
+	// as reading if you need to write to larger files
+}
+
+func EnterSomething() {
+	// This will read from user input and work with the data. We'll just
+	// convert the string to uppercase and lowercase. For this, I'll use
+	// the fmt library to scan a line, meaning it will listen on STDIN
+	// until a newline is received. In this case, this happens when the
+	// user presses the "Enter" key.
+
+	fmt.Printf("Enter a string for me to play with: ")
+
+	// The below part will work if you want to delimit on a specific
+	// rune, in this case \n -- but the scanner might be better
+	// suited for reading line-by-line
+
+	// reader := bufio.NewReader(os.Stdin)
+	// fmt.Printf("Enter text: ")
+	// input, err := reader.ReadString('\n')
+	// if err != nil {
+	// 	fmt.Println("Error reading input:", err)
+	// }
+	// fmt.Println(input[:len(input)-1])
+
+	scanner := bufio.NewScanner(os.Stdin)
+	var inputText string
+	if scanner.Scan() {
+		inputText = scanner.Text()
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Println("Error reading input: ", err)
+	}
+	// Now let's manipulate this string!
+
+	fmt.Printf("Uppercase: %s!!!\n", strings.ToUpper(inputText))
+	fmt.Printf("Lowercase: ...%s...\n", strings.ToLower(inputText))
+
+}
+
+func SplitStrings(myString string) []string {
+	// This function will split a string into words
+	// you can also split them by lines
+	return strings.Split(myString, " ")
 }
 
 func main() {
 	ReadEntireFile()
-	ReadInChunks()
+	ReadInChunks(1024)
+	WriteToFile("Hello World!\n")
 
+	EnterSomething()
+	words := SplitStrings("The quick brown fox jumped over the lazy dogs")
+
+	fmt.Printf("Print the first 3 words: ")
+	for i := 0; i < 3; i++ {
+		fmt.Printf("%s ", words[i])
+	}
+	fmt.Println()
 }
