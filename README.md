@@ -49,3 +49,5 @@ I made a quick "Hello World" application to show that if you type `go run hello`
 I'll try to add this as much as possible
 
 [Working with Files and String Manipulation](./filesandstrings/)
+[Working with Structs](./structs/)
+[Finite Sets](./finitesets/)
