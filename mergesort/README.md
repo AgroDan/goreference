@@ -1,0 +1,3 @@
+# Merge Sort
+
+I love the elegance of Merge Sort. It may not be the fastest sorting algorithm, but it's still pretty fast. Sometimes I've found myself needing to sort things based on contextually different criteria than simple alphabetic or numerical order. This is how I would implement this sort method. Is there a better way to do this that involves a common library? Probably. But sometimes you just want to see how the sausage is made.

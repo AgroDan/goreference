@@ -4,5 +4,6 @@ use (
 	./filesandstrings
 	./finitesets
 	./hello
+	./mergesort
 	./structs
 )
