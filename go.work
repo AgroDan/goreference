@@ -1,6 +1,8 @@
 go 1.22.3
 
 use (
+	./channels
+	./files
 	./filesandstrings
 	./finitesets
 	./hello

@@ -52,3 +52,5 @@ I'll try to add this as much as possible
 - [Working with Structs](./structs/)
 - [Finite Sets](./finitesets/)
 - [Merge Sort](./mergesort/)
+- [Concurrency: Channels, Waitgroups, and Mutexes](./channels/)
+- [Working with Files and Directories](./files/)
