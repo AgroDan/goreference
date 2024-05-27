@@ -54,3 +54,4 @@ I'll try to add this as much as possible
 - [Merge Sort](./mergesort/)
 - [Concurrency: Channels, Waitgroups, and Mutexes](./channels/)
 - [Working with Files and Directories](./files/)
+- [Bytes Buffer](./buffers)
