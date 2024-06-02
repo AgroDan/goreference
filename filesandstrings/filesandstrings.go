@@ -114,6 +114,45 @@ func WriteToFile(someData string) {
 	// as reading if you need to write to larger files
 }
 
+func ReadLineByLine(someFile string) []string {
+	// this function will use the bufio.Scanner object to read in a file
+	// line by line. This is a super easy way of handling file manipulation,
+	// but it has an upper limit of 65535 characters per line. Any more than
+	// that and you'll have to use the bufio Buffer object to ingest data,
+	// but it's no big deal.
+
+	// First, open the file as usual.
+	fp, err := os.Open(someFile)
+	if err != nil {
+		panic("could not open file")
+	}
+	defer fp.Close()
+
+	// set up the scanner
+	scanner := bufio.NewScanner(fp)
+
+	// set up the return value
+	var retval []string
+
+	// now we can just call the scanner.Scan() function to iterate over each
+	// line, separated by Newline characters. You can change the delimiter by
+	// words by adding the following line:
+	//
+	// scanner.Split(bufio.ScanWords)
+	//
+	// Then when you perform the scan function it will iterate over each word.
+	// However, by default the SplitFunc is bufio.ScanLines, so we can just start
+	// iterating right off the rip.
+	for scanner.Scan() {
+		retval = append(retval, scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		panic("error reading input")
+	}
+	return retval
+}
+
 func EnterSomething() {
 	// This will read from user input and work with the data. We'll just
 	// convert the string to uppercase and lowercase. For this, I'll use
@@ -160,6 +199,7 @@ func SplitStrings(myString string) []string {
 func main() {
 	ReadEntireFile()
 	ReadInChunks(1024)
+	ReadLineByLine("./filesandstrings/nonsensicalmaze.txt")
 	WriteToFile("Hello World!\n")
 
 	EnterSomething()

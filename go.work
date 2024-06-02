@@ -7,6 +7,7 @@ use (
 	./filesandstrings
 	./finitesets
 	./hello
+	./maze
 	./mergesort
 	./structs
 	./webreq
