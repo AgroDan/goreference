@@ -56,3 +56,4 @@ I'll try to add this as much as possible
 - [Working with Files and Directories](./files/)
 - [Bytes Buffer](./buffers/)
 - [Web Requests](./webreq/)
+- [Hashing and Base64'ing in Go](./hashing)
