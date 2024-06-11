@@ -1,0 +1,10 @@
+In Go's bright land where code runs lean,
+A language born for speed unseen,
+With goroutines like rivers flow,
+Concurrency, the heartbeats grow.
+No tangled web of syntax strange,
+In Go, simplicity's the range.
+With structs and types in clear array,
+Building strong foundations day by day.
+A golden gopher, bold and bright,
+In Go's embrace, code takes its flight.

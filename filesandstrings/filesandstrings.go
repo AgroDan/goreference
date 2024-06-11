@@ -82,6 +82,30 @@ func ReadInChunks(bytesReadSize int) {
 	}
 }
 
+func ReadLineByLine() {
+	// This function will read a file line by line. It will also make
+	// use of the io.Reader interface that os.Open() will return.
+	fileReader, err := os.Open("./filesandstrings/poetry.txt")
+	if err != nil {
+		panic(err)
+	}
+	defer fileReader.Close()
+
+	// Now we'll set up a bufio scanner which has a lot more efficient
+	// means of parsing a file. It accepts io.Reader as input!
+	fr := bufio.NewScanner(fileReader)
+
+	// Now we'll loop over each line, which fr.Scan() is built to handle!
+	// It will loop until EOF. This should be fine for most scenarios, because
+	// you can then split the resulting string using the strings library if
+	// necessary.
+	var counter int = 0
+	for fr.Scan() {
+		fmt.Println("Line", counter, "-", fr.Text())
+		counter++
+	}
+}
+
 func WriteToFile(someData string) {
 	// Writing to a file, by default, accepts a byte array.
 	// If you want to write a string however, you can use the
@@ -160,6 +184,7 @@ func SplitStrings(myString string) []string {
 func main() {
 	ReadEntireFile()
 	ReadInChunks(1024)
+	ReadLineByLine()
 	WriteToFile("Hello World!\n")
 
 	EnterSomething()
